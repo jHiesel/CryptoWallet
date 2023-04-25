@@ -34,7 +34,11 @@ class PurchaseRESTController extends RESTController
      */
     private function handleGETRequest()
     {
-        // TODO
+        if($this->verb == null && sizeof($this->args) == 0){
+            $this->response(Purchase::getAll());
+        }elseif($this->verb == null && sizeof($this->args) == 1){
+            $this->response(Purchase::get($this->args[0]));
+        }
     }
 
     /**
@@ -60,7 +64,18 @@ class PurchaseRESTController extends RESTController
      */
     private function handlePUTRequest()
     {
-        // TODO
+        $model = Purchase::get($this->args[0]);
+        $model->setDate($this->getDataOrNull('date'));
+        $model->setAmount($this->getDataOrNull('amount'));
+        $model->setPrice($this->getDataOrNull('price'));
+        $model->setCurrency($this->getDataOrNull('currency'));
+
+        if ($model->save()) {
+            $this->response("OK", 201);
+        } else {
+            $this->response($model->getErrors(), 400);
+        }
+
     }
 
     /**
