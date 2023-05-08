@@ -11,7 +11,7 @@ app.component('purchase-form', {
     <h2>Cryptowährung Kaufen</h2>
         
             <label for="currency">Cryptowährung</label>
-            <select id="currency">
+            <select id="currency" v-on:change="updateAmount()">
                 <option v-for="(course, index) in courses">{{index}} {{course["EUR"]}}€</option>
             </select>
                
@@ -49,7 +49,7 @@ app.component('purchase-form', {
         updateAmount (){
             var currentSelection = document.getElementById( "currency" );
             var ruffCut= currentSelection.options[currentSelection.selectedIndex ].value;
-            this.currency = this.courses[ruffCut.substring(0,3)]["EUR"]*this.amount;
+            this.currency = this.courses[ruffCut.substring(0,ruffCut.indexOf(" "))]["EUR"]*this.amount;
         }
 
     },
