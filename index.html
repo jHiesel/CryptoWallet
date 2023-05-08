@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
+
 <div id="app">
     <div class="nav-bar"><h3>TODO CryptoApp</h3></div>
     <app-display :prices="prices" :purchases="purchases" @add-to-wallet="addPurchase"></app-display>
@@ -19,11 +20,16 @@
 <script src="main.js"></script>
 
 <!-- Import Components -->
-<script src="components/WalletDisplay.js"></script>
+<script src="components/WalletList.js"></script>
+<script src="components/AppDisplay.js"></script>
+<script src="components/PurchaseForm.js"></script>
 
 <!-- Mount App -->
 <script>
     const a = app.mount('#app')
 </script>
+
+
+
 </body>
 </html>
