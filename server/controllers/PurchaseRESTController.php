@@ -64,12 +64,13 @@ class PurchaseRESTController extends RESTController
      */
     private function handlePUTRequest()
     {
+        if($this->verb == null && sizeof($this->args) == 1){
         $model = Purchase::get($this->args[0]);
         $model->setDate($this->getDataOrNull('date'));
         $model->setAmount($this->getDataOrNull('amount'));
         $model->setPrice($this->getDataOrNull('price'));
         $model->setCurrency($this->getDataOrNull('currency'));
-
+        }
         if ($model->save()) {
             $this->response("OK", 201);
         } else {

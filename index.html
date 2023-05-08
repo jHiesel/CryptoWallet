@@ -8,12 +8,29 @@
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="components/Ajax.js"></script>
+
 </head>
 <body>
 
 <div id="app">
     <div class="nav-bar"><h3>TODO CryptoApp</h3></div>
-    <app-display :prices="prices" :purchases="purchases" @add-to-wallet="addPurchase"></app-display>
+
+    <div class="wallet-container">
+
+
+
+            <purchase-form :currency="currency"></purchase-form>
+        <div class="wallet-list">
+            <h2>Wallet:</h2>
+            <app-display></app-display>
+            <wallet-list></wallet-list>
+        </div>
+
+
+
+    </div>
+
 </div>
 
 <!-- Import App -->
@@ -24,12 +41,13 @@
 <script src="components/AppDisplay.js"></script>
 <script src="components/PurchaseForm.js"></script>
 
+
 <!-- Mount App -->
 <script>
     const a = app.mount('#app')
 </script>
 
-<div></div>
+
 
 
 

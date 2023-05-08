@@ -43,7 +43,7 @@ class Purchase implements DatabaseObject, JsonSerializable
     public function create()
     {
         $db = Database::connect();
-        $sql = "INSERT INTO purchase (date, amount, price, currency) values(?, ?, ?, ?)";
+        $sql = "INSERT INTO purchase (date, amount, price, currency) values(?, ?, ?, ? )";
         $stmt = $db->prepare($sql);
         $stmt->execute(array($this->date, $this->amount, $this->price, $this->currency));
         $lastId = $db->lastInsertId();
@@ -106,8 +106,14 @@ class Purchase implements DatabaseObject, JsonSerializable
      */
     public static function getAllGroupByCurrency($currency = '')
     {
-        // TODO
-        return [];
+        $db = Database::connect();
+        $sql = "SELECT * FROM purchase WHERE currency = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(array($currency));
+        $item = $stmt->fetchObject('Purchase');  // ORM
+        Database::disconnect();
+        return $item !== false ? $item : null;
+
     }
 
     /**

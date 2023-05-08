@@ -4,7 +4,8 @@ app.component('wallet-list', {
     template:
     /*html*/
         `
-    `,
+        <p>Wallet List</p>
+`,
     methods: {
 
     },
