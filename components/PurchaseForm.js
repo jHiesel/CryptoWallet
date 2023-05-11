@@ -14,7 +14,6 @@ app.component('purchase-form', {
             <select id="currency" v-on:change="updateAmount()">
                 <option v-for="(course, index) in courses">{{index}} {{course["EUR"]}}€</option>
             </select>
-               <p>{{typeCurrency}}</p>
              <label for="amount">Menge :</label>
             <input class="input"
              type="number"
@@ -54,23 +53,27 @@ app.component('purchase-form', {
             this.currency = this.courses[ruffCut.substring(0,ruffCut.indexOf(" "))]["EUR"]*this.amount;
         },
         postData(){
-            alert(this.purchase());
             fetch("http://localhost/01_PHP_code_SWPP/CryptoWallet/server/api.php?r=purchase",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(this.purchase()),
+                body: this.purchase(),
             });
         },
         purchase(){
-            let output = [];
-            output["id"]=null;
-            output["date"]=new Date();
-            output["amount"]=this.amount;
-            output["price"]= this.currency;
-            output["currency"]= this.typeCurrency;
-            return output;
+            let localDate
+            localDate = new Date();
+
+            localDate = localDate.toISOString().slice(0, 19).replace('T', ' ');
+            
+            let output = {
+                date:localDate,
+                amount: this.amount,
+                price:this.currency,
+                currency: this.typeCurrency
+            };
+            return JSON.stringify(output);
         }
 
     },
