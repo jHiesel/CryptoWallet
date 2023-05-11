@@ -41,11 +41,7 @@ app.component('purchase-form', {
         }
     },
     methods: {
-        async test() {
-            const response = await fetch("https://api.bitpanda.com/v1/ticker");
-            const json =  JSON.stringify(await response.json());
-            this.courses = JSON.parse(json);
-        },
+
         updateAmount (){
             var currentSelection = document.getElementById( "currency" );
             var ruffCut = currentSelection.options[currentSelection.selectedIndex ].value;
@@ -66,7 +62,7 @@ app.component('purchase-form', {
             localDate = new Date();
 
             localDate = localDate.toISOString().slice(0, 19).replace('T', ' ');
-            
+
             let output = {
                 date:localDate,
                 amount: this.amount,
@@ -78,7 +74,7 @@ app.component('purchase-form', {
 
     },
     mounted() {
-        this.test();
+        loadData();
     },
     computed: {
 
