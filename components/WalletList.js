@@ -4,24 +4,31 @@ app.component('wallet-list', {
     template:
     /*html*/
         `
-        <p>All the purchases: {{allPurchases}}</p>
+        <p>All the purchases: {{allPurchases}}€</p>
        
 `,
-    methods: {
+    data() {
+        return {
+            allPurchases: null,
 
+
+
+        }
     },
-    computed: {
-        async allPurchases() {
+    async mounted() {
+
             let old = 0;
             let current = 0;
-            const response = await fetch("http://localhost/01_PHP_code_SWPP/CryptoWallet/server/api.php?r=purchase");
-            let outputs = await response.json();
-            outputs.forEach(element =>
-                element.amount  * element.price
+            let output = 0;
+            const response = await fetch("http://localhost/CryptoWallet/server/api.php?r=purchase");
+            let data = await response.json();
 
+            data.forEach(function (content){
+                output += content.price * content.amount
 
-                );
-                console.log();
+            });
 
-    }}
+            this.allPurchases = Math.round(output * 100) / 100;
+
+    }
 })
