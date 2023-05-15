@@ -7,6 +7,7 @@ app.component('purchase-form', {
     template:
     /*html*/
         `
+
 <form class="wallet-form" v-on:submit.prevent="postData">
     <h2>Cryptowährung Kaufen</h2>
         
@@ -74,7 +75,7 @@ app.component('purchase-form', {
 
     },
     mounted() {
-        loadData();
+
     },
     computed: {
 
